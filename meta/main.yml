@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: systemd-timesyncd
   author: Hannes Fuchs
   description: >
     Setup systemd-timesyncd. Optionally sets timezone and removes other NTP
