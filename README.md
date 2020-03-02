@@ -14,8 +14,8 @@ Systemd with timesyncd.
 Role Variables
 --------------
 
-Default variables are listed in [defaults/main.yml](defaults/main.yml), OS
-depended variables are listed in [vars/*.yml](vars).
+Default variables are listed in `defaults/main.yml`, OS depended variables are
+listed in `vars/`.
 
 ```yaml
 systemd_timesycd_remove_other_daemons: false
@@ -24,8 +24,8 @@ systemd_timesycd_other_daemons: []
 
 No other NTP daemons will be removed by default. To remove may conflicting 
 daemons set `systemd_timesycd_remove_other_daemons` to `true`. The list of
-packages to remove is set in the playbook via the provided YAML file in 
-[vars](vars) directory.
+packages to remove is set in the playbook via the provided YAML file in `vars`
+directory.
 
 ```yaml
 systemd_timesycd_set_timezone: false
