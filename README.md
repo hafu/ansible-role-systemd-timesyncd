@@ -1,6 +1,8 @@
 systemd-timesyncd
 =================
 
+[![Build Status](https://travis-ci.com/hafu/ansible-role-systemd-timesyncd.svg?branch=master)](https://travis-ci.com/hafu/ansible-role-systemd-timesyncd)
+
 Configures *systemd-timesyncd* daemon. Optionally removes other ntp daemons 
 like *chrony*, *ntp* or *openntpd* and/or set the timezone.
 
@@ -55,9 +57,9 @@ also can not obtain any NTP server. This is the equivalent to `FallbackNTP=` of
 [timesyncd.conf](https://www.freedesktop.org/software/systemd/man/timesyncd.conf.html).
 
 ```yaml
-#systemd_timesycd_conf_root_distance_max_sec: 5
-#systemd_timesycd_conf_poll_interval_min_sec: 32
-#systemd_timesycd_conf_poll_interval_max_sec: 2048
+systemd_timesycd_conf_root_distance_max_sec: 5
+systemd_timesycd_conf_poll_interval_min_sec: 32
+systemd_timesycd_conf_poll_interval_max_sec: 2048
 ```
 
 These are optional and can be set if desired:
@@ -78,17 +80,19 @@ Example Playbook
 This example removes other installed NTP daemons, sets the timezone to
 `Europe/Berlin` and uses german pool NTP servers. 
 
-    - hosts: servers
-      roles:
-         - role: hafu.systemd-timesyncd
-           systemd_timesycd_remove_other_daemons: true
-           systemd_timesycd_set_timezone: true
-           systemd_timesycd_timezone: Europe/Berlin
-           systemd_timesycd_conf_fallback_ntp:
-             - 0.de.pool.ntp.org
-             - 1.de.pool.ntp.org
-             - 2.de.pool.ntp.org
-             - 3.de.pool.ntp.org
+```yaml
+- hosts: servers
+  roles:
+     - role: hafu.systemd-timesyncd
+       systemd_timesycd_remove_other_daemons: true
+       systemd_timesycd_set_timezone: true
+       systemd_timesycd_timezone: Europe/Berlin
+       systemd_timesycd_conf_fallback_ntp:
+         - 0.de.pool.ntp.org
+         - 1.de.pool.ntp.org
+         - 2.de.pool.ntp.org
+         - 3.de.pool.ntp.org
+```
 
 License
 -------
