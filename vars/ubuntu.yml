@@ -1,0 +1,6 @@
+---
+systemd_timesycd_other_daemons:
+  - chrony
+  - ntp
+  - ntpsec
+  - openntpd

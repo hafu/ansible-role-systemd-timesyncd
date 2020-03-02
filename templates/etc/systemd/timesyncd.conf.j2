@@ -1,0 +1,29 @@
+# {{ ansible_managed }}
+#
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation; either version 2.1 of the License, or
+#  (at your option) any later version.
+#
+# Entries in this file show the compile time defaults.
+# You can change settings by editing this file.
+# Defaults can be restored by simply deleting this file.
+#
+# See timesyncd.conf(5) for details.
+
+[Time]
+NTP={{ systemd_timesycd_conf_ntp_servers|default("")|join(" ") }}
+{% if systemd_timesycd_conf_fallback_ntp is defined and systemd_timesycd_conf_fallback_ntp is iterable %}
+FallbackNTP={{ systemd_timesycd_conf_fallback_ntp|join(" ") }}
+{% endif %}
+{% if systemd_timesycd_conf_root_distance_max_sec is defined and systemd_timesycd_conf_root_distance_max_sec|int %}
+RootDistanceMaxSec={{ systemd_timesycd_conf_root_distance_max_sec|int }}
+{% endif %}
+{% if systemd_timesycd_conf_poll_interval_min_sec is defined and systemd_timesycd_conf_poll_interval_min_sec|int > 16 %}
+PollIntervalMinSec={{ systemd_timesycd_conf_poll_interval_min_sec|int }}
+{% endif %}
+{% if systemd_timesycd_conf_poll_interval_max_sec is defined and systemd_timesycd_conf_poll_interval_max_sec|int and systemd_timesycd_conf_poll_interval_max_sec|int > systemd_timesycd_conf_poll_interval_min_sec|default(32)|int %}
+PollIntervalMaxSec={{ systemd_timesycd_conf_poll_interval_max_sec|int }}
+{% endif %}

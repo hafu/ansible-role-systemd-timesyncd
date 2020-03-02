@@ -1,0 +1,7 @@
+---
+# handlers file for systemd-timesyncd
+
+- name: restart systemd-timesyncd
+  service:
+    name: systemd-timesyncd
+    state: restarted

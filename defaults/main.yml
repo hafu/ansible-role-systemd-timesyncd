@@ -1,0 +1,23 @@
+---
+# defaults file for systemd-timesyncd
+
+# remove other daemons listed in vars
+systemd_timesycd_remove_other_daemons: false
+systemd_timesycd_other_daemons: []
+
+# set timezone
+systemd_timesycd_set_timezone: false
+systemd_timesycd_timezone: Etc/UTC
+
+# configuration settings for timesyncd.conf
+# https://www.freedesktop.org/software/systemd/man/timesyncd.conf.html
+systemd_timesycd_conf_ntp_servers: []
+systemd_timesycd_conf_fallback_ntp:
+  - 0.pool.ntp.org
+  - 1.pool.ntp.org
+  - 2.pool.ntp.org
+  - 3.pool.ntp.org
+# if not set use defaults
+#systemd_timesycd_conf_root_distance_max_sec: 5
+#systemd_timesycd_conf_poll_interval_min_sec: 32
+#systemd_timesycd_conf_poll_interval_max_sec: 2048

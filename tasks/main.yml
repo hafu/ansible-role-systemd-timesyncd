@@ -1,0 +1,38 @@
+---
+# tasks file for systemd-timesyncd
+
+- name: gather os specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - >
+      vars/{{ ansible_distribution|lower }}-
+      {{ ansible_distribution_major_version|lower }}.yml
+    - "vars/{{ ansible_distribution|lower }}.yml"
+    - "vars/{{ ansible_os_family|lower }}.yml"
+
+- name: remove other ntp daemons
+  package:
+    name: "{{ systemd_timesycd_other_daemons }}"
+  when: systemd_timesycd_remove_other_daemons|default(false) and
+        systemd_timesycd_other_daemons|length > 0
+
+- name: set timezone
+  timezone:
+    name: "{{ systemd_timesycd_timezone|default('Etc/UTC') }}"
+  notify: restart systemd-timesyncd
+  when: systemd_timesycd_set_timezone|default(false)
+
+- name: write timesyncd.conf
+  template:
+    src: etc/systemd/timesyncd.conf.j2
+    dest: /etc/systemd/timesyncd.conf
+    mode: 0644
+    owner: root
+    group: root
+  notify: restart systemd-timesyncd
+
+- name: start and enable systemd-timesyncd
+  service:
+    name: systemd-timesyncd
+    enabled: true
+    state: started
