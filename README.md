@@ -1,7 +1,7 @@
 systemd-timesyncd
 =================
 
-[![Build Status](https://api.travis-ci.org/hafu/ansible-role-systemd-timesyncd.svg?branch=master)](https://travis-ci.com/hafu/ansible-role-systemd-timesyncd)
+[![Build Status](https://api.travis-ci.com/hafu/ansible-role-systemd-timesyncd.svg?branch=master)](https://travis-ci.com/hafu/ansible-role-systemd-timesyncd)
 
 Configures *systemd-timesyncd* daemon. Optionally removes other ntp daemons 
 like *chrony*, *ntp* or *openntpd* and/or set the timezone.
